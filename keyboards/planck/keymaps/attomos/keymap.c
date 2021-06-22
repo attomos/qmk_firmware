@@ -34,7 +34,9 @@ enum planck_keycodes {
   DVORAK,
   PLOVER,
   BACKLIT,
-  EXT_PLV
+  EXT_PLV,
+  ATOM_M1,
+  ATOM_M2
 };
 
 #define LOWER MO(_LOWER)
@@ -100,7 +102,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ,-----------------------------------------------------------------------------------.
  * |   ~  |   !  |   @  |   #  |   $  |   %  |   ^  |   &  |   *  |   (  |   )  | F13 |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * | Del  |      |      |      |      |      |      |   _  |   +  |   {  |   }  |  |   |
+ * | Del  |      |      |  M1  |  M2  |      |      |   _  |   +  |   {  |   }  |  |   |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
  * |      |      |      |      |      |      |      |      |      | Home | End  |      |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
@@ -109,7 +111,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 [_LOWER] = LAYOUT_planck_grid(
     KC_TILD, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC, KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, KC_F13,
-    KC_DEL,  _______, _______, _______, _______, _______, _______, KC_UNDS, KC_PLUS, KC_LCBR, KC_RCBR, KC_PIPE,
+    KC_DEL,  _______, _______, ATOM_M1, ATOM_M2, _______, _______, KC_UNDS, KC_PLUS, KC_LCBR, KC_RCBR, KC_PIPE,
     _______, _______, _______, _______, _______, _______, _______, _______, _______, KC_HOME, KC_END,  _______,
     _______, _______, _______, _______, _______, _______, _______, _______, KC_MNXT, KC_VOLD, KC_VOLU, KC_MPLY
 ),
@@ -243,6 +245,26 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
           PLAY_SONG(plover_gb_song);
         #endif
         layer_off(_PLOVER);
+      }
+      return false;
+      break;
+    case ATOM_M1:
+      if (record->event.pressed) {
+        register_code(KC_LCTL);
+        register_code(KC_PGUP);
+      } else {
+        unregister_code(KC_LCTL);
+        unregister_code(KC_PGUP);
+      }
+      return false;
+      break;
+    case ATOM_M2:
+      if (record->event.pressed) {
+        register_code(KC_LCTL);
+        register_code(KC_PGDN);
+      } else {
+        unregister_code(KC_LCTL);
+        unregister_code(KC_PGDN);
       }
       return false;
       break;
