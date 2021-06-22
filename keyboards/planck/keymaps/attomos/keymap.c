@@ -36,7 +36,11 @@ enum planck_keycodes {
   BACKLIT,
   EXT_PLV,
   ATOM_M1,
-  ATOM_M2
+  ATOM_M2,
+  ATOM_M3,
+  ATOM_M4,
+  ATOM_M5,
+  ATOM_M6
 };
 
 #define LOWER MO(_LOWER)
@@ -102,17 +106,17 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ,-----------------------------------------------------------------------------------.
  * |   ~  |   !  |   @  |   #  |   $  |   %  |   ^  |   &  |   *  |   (  |   )  | F13  |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * | Del  |      |      |  M1  |  M2  |      |      |   _  |   +  |   {  |   }  |  |   |
+ * | Del  |      |      |  M1  |  M2  |  M4  |  M5  |   _  |   +  |   {  |   }  |  |   |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * |      |      |      |      |      |      |      |      |      | Home | End  |      |
+ * |      |      |      |      |  M3  |      |  M6  |      |      | Home | End  |      |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
  * |      |      |      |      |      |             |      | Next | Vol- | Vol+ | Play |
  * `-----------------------------------------------------------------------------------'
  */
 [_LOWER] = LAYOUT_planck_grid(
     KC_TILD, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC, KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, KC_F13,
-    KC_DEL,  _______, _______, ATOM_M1, ATOM_M2, _______, _______, KC_UNDS, KC_PLUS, KC_LCBR, KC_RCBR, KC_PIPE,
-    _______, _______, _______, _______, _______, _______, _______, _______, _______, KC_HOME, KC_END,  _______,
+    KC_DEL,  _______, _______, ATOM_M1, ATOM_M2, ATOM_M4, ATOM_M5, KC_UNDS, KC_PLUS, KC_LCBR, KC_RCBR, KC_PIPE,
+    _______, _______, _______, _______, ATOM_M3, _______, ATOM_M6, _______, _______, KC_HOME, KC_END,  _______,
     _______, _______, _______, _______, _______, _______, _______, _______, KC_MNXT, KC_VOLD, KC_VOLU, KC_MPLY
 ),
 
@@ -265,6 +269,34 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       } else {
         unregister_code(KC_LCTL);
         unregister_code(KC_PGDN);
+      }
+      return false;
+      break;
+    case ATOM_M3:
+      if (record->event.pressed) {
+        register_code(KC_LALT);
+        register_code(KC_ESC);
+      } else {
+        unregister_code(KC_LALT);
+        unregister_code(KC_ESC);
+      }
+      return false;
+      break;
+    case ATOM_M4:
+      if (record->event.pressed) {
+        SEND_STRING("[t");
+      }
+      return false;
+      break;
+    case ATOM_M5:
+      if (record->event.pressed) {
+        SEND_STRING("]t");
+      }
+      return false;
+      break;
+    case ATOM_M6:
+      if (record->event.pressed) {
+        SEND_STRING("]T");
       }
       return false;
       break;
