@@ -45,15 +45,25 @@ enum planck_keycodes {
 
 // https://docs.qmk.fm/#/feature_tap_dance
 // Tap Dance declarations
-enum {
-    TD_TAB_ESC,
-};
+/* enum { */
+/*     TD_TAB_ESC, */
+/* }; */
+
+/* void tab_esc_dance(qk_tap_dance_state_t *state, void *user_data) { */
+/*   if (state->count <= 2) { */
+/*     tap_code(KC_TAB); */
+/*   } else if (state->count == 3) { */
+/*     tap_code(KC_ESC); */
+/*   } else { */
+/*     reset_tap_dance(state); */
+/*   } */
+/* } */
 
 // Tap Dance definitions
-qk_tap_dance_action_t tap_dance_actions[] = {
-    // Tap once for Tab, twice for Esc
-    [TD_TAB_ESC] = ACTION_TAP_DANCE_DOUBLE(KC_TAB, KC_ESC),
-};
+/* qk_tap_dance_action_t tap_dance_actions[] = { */
+/*   // Tap once for Tab, thrice for Esc */
+/*   [TD_TAB_ESC] = ACTION_TAP_DANCE_FN(tab_esc_dance), */
+/* }; */
 
 #define LOWER MO(_LOWER)
 #define RAISE MO(_RAISE)
@@ -72,7 +82,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * `-----------------------------------------------------------------------------------'
  */
 [_QWERTY] = LAYOUT_planck_grid(
-    TD(TD_TAB_ESC), KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_BSPC,
+    KC_TAB,         KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_BSPC,
     KC_LCTL,        KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT,
     KC_LSFT,        KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_ENT ,
     LCTL_T(KC_ESC), KC_LCTL, KC_LGUI, KC_LALT, LOWER,   KC_SPC,  KC_SPC,  RAISE,   KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT

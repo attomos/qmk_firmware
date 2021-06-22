@@ -37,4 +37,4 @@
 /*
  * Tap dance!
  */
-#define TAPPING_TERM 150
+// #define TAPPING_TERM 175
