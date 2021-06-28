@@ -38,3 +38,6 @@
  * Tap dance!
  */
 // #define TAPPING_TERM 175
+
+// https://beta.docs.qmk.fm/using-qmk/software-features/tap_hold
+#define TAPPING_TERM 150
