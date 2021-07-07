@@ -174,7 +174,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------+------+------+------+------+------+------|
  * | Del  |      |      |  M1  |  M2  |  M4  |  M5  |   _  |   +  |   {  |   }  |  |   |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * |      |      |      |      |  M3  |      |  M6  |      | Prev | Home | End  |      |
+ * |      |      |      |      |      |      |  M6  |  M3  | Prev | Home | End  |      |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
  * |Nump  |      |      |      |      |             |      | Next | Bri- | Bri+ | Play |
  * `-----------------------------------------------------------------------------------'
@@ -182,7 +182,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [_LOWER] = LAYOUT_planck_grid(
     KC_TILD, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC, KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, KC_F13,
     KC_DEL,  _______, _______, ATOM_M1, ATOM_M2, ATOM_M4, ATOM_M5, KC_UNDS, KC_PLUS, KC_LCBR, KC_RCBR, KC_PIPE,
-    _______, _______, _______, _______, ATOM_M3, _______, ATOM_M6, _______, KC_MPRV, KC_HOME, KC_END,  _______,
+    _______, _______, _______, _______, _______, _______, ATOM_M6, ATOM_M3, KC_MPRV, KC_HOME, KC_END,  _______,
     NUMPAD,  _______, _______, _______, _______, _______, _______, _______, KC_MNXT, KC_BRID, KC_BRIU, KC_MPLY
 ),
 
@@ -347,11 +347,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       break;
     case ATOM_M3:
       if (record->event.pressed) {
-        register_code(KC_LALT);
-        register_code(KC_ESC);
+        register_code(KC_LGUI);
+        register_code(KC_F12);
       } else {
-        unregister_code(KC_LALT);
-        unregister_code(KC_ESC);
+        unregister_code(KC_LGUI);
+        unregister_code(KC_F12);
       }
       return false;
       break;
