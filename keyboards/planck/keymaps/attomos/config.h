@@ -39,5 +39,19 @@
  */
 // #define TAPPING_TERM 175
 
-// https://beta.docs.qmk.fm/using-qmk/software-features/tap_hold
+// https://beta.docs.qmk.fm/using-qmk/software-features/tap_hold#tapping-term
 #define TAPPING_TERM 150
+
+// I will use `zl` as an example to explain the reasoning behind the below settings
+
+// https://beta.docs.qmk.fm/using-qmk/software-features/tap_hold#ignore-mod-tap-interrupt
+// normal: AA_Z mods + l
+// with this setting: a "quick tap" will produce zl
+#define IGNORE_MOD_TAP_INTERRUPT_PER_KEY
+
+// https://beta.docs.qmk.fm/using-qmk/software-features/tap_hold#retro-tapping
+// normal: AA_Z mods + l
+// with this setting: "holding and releasing AA_Z" will produce z
+#define RETRO_TAPPING_PER_KEY
+
+// without _PER_KEY will result in undesired behavior for my CTL_T(KC_ESC) key
