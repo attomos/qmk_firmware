@@ -27,7 +27,8 @@ enum planck_layers {
   _LOWER,
   _RAISE,
   _PLOVER,
-  _ADJUST
+  _ADJUST,
+  _NAV
 };
 
 enum planck_keycodes {
@@ -43,7 +44,16 @@ enum planck_keycodes {
   ATOM_M3,
   ATOM_M4,
   ATOM_M5,
-  ATOM_M6
+  ATOM_M6,
+  NN_A,
+  NN_S,
+  NN_W,
+  NN_D,
+  NN_T,
+  NN_Q,
+  NN_E,
+  NN_N,
+  NN_SPC
 };
 
 // https://docs.qmk.fm/#/feature_tap_dance
@@ -76,6 +86,25 @@ enum planck_keycodes {
 #define AA_Z MT(MOD_LCTL | MOD_LALT | MOD_LGUI | MOD_LSFT, KC_Z)
 #define AA_X MT(MOD_LCTL | MOD_LALT | MOD_LGUI, KC_X)
 
+/* // https://precondition.github.io/home-row-mods */
+/* // Left-hand home row mods */
+/* #define AA_A LCTL_T(KC_A) */
+/* #define AA_S LGUI_T(KC_S) */
+/* #define AA_D LALT_T(KC_D) */
+/* #define AA_F LSFT_T(KC_F) */
+
+/* #define AA_D LT(_NAV, KC_SCLN) */
+
+/* // Right-hand home row mods */
+/* #define AA_J LSFT_T(KC_J) */
+#define AA_K RGUI_T(KC_K)
+/* #define AA_L LGUI_T(KC_L) */
+#define AA_SCLN LGUI_T(KC_SCLN)
+
+/* #define AA_SCLN LGUI_T(KC_SCLN) */
+
+#define AA_SPC LT(_NAV, KC_SPC)
+
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 /* Qwerty
@@ -91,9 +120,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 [_QWERTY] = LAYOUT_planck_grid(
     KC_TAB,         KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_BSPC,
-    CTL_T(KC_ESC),  KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT,
+    CTL_T(KC_ESC),  KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    AA_K,    KC_L,    AA_SCLN, KC_QUOT,
     KC_LSFT,        AA_Z,    AA_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_ENT ,
-    KC_LCTL,        KC_LCTL, KC_LGUI, KC_LALT, LOWER,   KC_SPC,  KC_SPC,  RAISE,   KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT
+    KC_LCTL,        KC_LCTL, KC_LGUI, KC_LALT, LOWER,   AA_SPC,  AA_SPC,  RAISE,   KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT
 ),
 
 /* Qwerty CSGO (QwerCS)
@@ -166,6 +195,24 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_ESC,  KC_A,    KC_O,    KC_E,    KC_U,    KC_I,    KC_D,    KC_H,    KC_T,    KC_N,    KC_S,    KC_SLSH,
     KC_LSFT, KC_SCLN, KC_Q,    KC_J,    KC_K,    KC_X,    KC_B,    KC_M,    KC_W,    KC_V,    KC_Z,    KC_ENT ,
     BACKLIT, KC_LCTL, KC_LALT, KC_LGUI, LOWER,   KC_SPC,  KC_SPC,  RAISE,   KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT
+),
+
+/* Nav
+ * ,-----------------------------------------------------------------------------------.
+ * |      |      | UP+  |      |      |      |      |      |      |      | Up   |      |
+ * |------+------+------+------+------+------+------+------+------+------+------+------|
+ * |      | LEFT+| DOWN+|RIGHT+|      |      | Left | Down | Up   | Right|      |      |
+ * |------+------+------+------+------+------+------+------+------+------+------+------|
+ * |      |      |      |      |      |      | Down |      |      |      |      |      |
+ * |------+------+------+------+------+------+------+------+------+------+------+------|
+ * |      |      |      |      |      |    Space    |      |      |      |      |      |
+ * `-----------------------------------------------------------------------------------'
+ */
+[_NAV] = LAYOUT_planck_grid(
+    _______,    NN_Q,    NN_W,     NN_E, _______,    NN_T, _______, _______, _______, _______, _______, _______,
+    _______,    NN_A,    NN_S,     NN_D, _______, _______, KC_LEFT, KC_DOWN,   KC_UP, KC_RGHT, _______, _______,
+    _______, _______, _______,  _______, _______, _______,    NN_N, _______, _______, _______, _______, _______,
+    _______, _______, _______,  _______, _______,  NN_SPC,  NN_SPC, _______, _______, _______, _______, _______
 ),
 
 /* Lower
@@ -325,6 +372,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       }
       return false;
       break;
+    case NN_Q:
     case ATOM_M1:
       if (record->event.pressed) {
         register_code(KC_LCTL);
@@ -335,6 +383,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       }
       return false;
       break;
+    case NN_E:
     case ATOM_M2:
       if (record->event.pressed) {
         register_code(KC_LCTL);
@@ -370,6 +419,70 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     case ATOM_M6:
       if (record->event.pressed) {
         SEND_STRING("]T");
+      }
+      return false;
+      break;
+    case NN_A:
+      if (record->event.pressed) {
+        register_code(KC_LGUI);
+        register_code(KC_LSFT);
+        register_code(KC_LEFT);
+      } else {
+        unregister_code(KC_LGUI);
+        unregister_code(KC_LSFT);
+        unregister_code(KC_LEFT);
+      }
+      return false;
+      break;
+    case NN_S:
+      if (record->event.pressed) {
+        SEND_STRING(SS_RGUI("s"));
+      }
+      return false;
+      break;
+    case NN_W:
+      if (record->event.pressed) {
+        SEND_STRING(SS_RGUI("w"));
+      }
+      return false;
+      break;
+    case NN_D:
+      if (record->event.pressed) {
+        register_code(KC_LGUI);
+        register_code(KC_LSFT);
+        register_code(KC_RGHT);
+      } else {
+        unregister_code(KC_LGUI);
+        unregister_code(KC_LSFT);
+        unregister_code(KC_RGHT);
+      }
+      return false;
+      break;
+    case NN_T:
+      if (record->event.pressed) {
+        SEND_STRING(SS_RGUI("t"));
+      }
+      return false;
+      break;
+    case NN_N:
+      if (record->event.pressed) {
+        register_code(KC_RGUI);
+        register_code(KC_LSFT);
+        register_code(KC_N);
+      } else {
+        unregister_code(KC_RGUI);
+        unregister_code(KC_LSFT);
+        unregister_code(KC_N);
+      }
+      return false;
+      break;
+    case NN_SPC:
+      if (record->event.pressed) {
+        register_code(KC_RGUI);
+        register_code(KC_BSPC);
+      } else {
+        unregister_code(KC_RGUI);
+        unregister_code(KC_BSPC);
       }
       return false;
       break;
