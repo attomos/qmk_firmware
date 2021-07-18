@@ -38,6 +38,7 @@ enum the40_keycodes {
   ATOM_M5,
   ATOM_M6,
   ATOM_M7,
+  ATOM_M8,
   NN_A,
   NN_S,
   NN_W,
@@ -107,7 +108,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------+------+------+------+------+------+------|
  * | Del  |      |      |  M1  |  M2  |  M4  |  M5  |   _  |   +  |   {  |   }  |  |   |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * |      |  M7  |      |      |      |      |  M6  |  M3  | Prev | Home | End  |      |
+ * |      |  M7  |  M8  |      |      |      |  M6  |  M3  | Prev | Home | End  |      |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
  * |Nump  |      |      |      |      |             |      | Next | Bri- | Bri+ | Play |
  * `-----------------------------------------------------------------------------------'
@@ -115,7 +116,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [_LOWER] = LAYOUT_ortho(
     KC_TILD, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC, KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, KC_F13,
     KC_DEL,  _______, _______, ATOM_M1, ATOM_M2, ATOM_M4, ATOM_M5, KC_UNDS, KC_PLUS, KC_LCBR, KC_RCBR, KC_PIPE,
-       NAV, ATOM_M7, _______, _______, _______, _______, ATOM_M6, ATOM_M3, KC_MPRV, KC_HOME, KC_END,  _______,
+       NAV, ATOM_M7, ATOM_M8, _______, _______, _______, ATOM_M6, ATOM_M3, KC_MPRV, KC_HOME, KC_END,  _______,
     NUMPAD,  _______, _______, _______, _______, _______, _______, _______, KC_MNXT, KC_BRID, KC_BRIU, KC_MPLY
 ),
 
@@ -274,6 +275,18 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         unregister_code(KC_LALT);
         unregister_code(KC_LSFT);
         unregister_code(KC_4);
+      }
+      return false;
+      break;
+    case ATOM_M8:
+      if (record->event.pressed) {
+        register_code(KC_LALT);
+        register_code(KC_LSFT);
+        register_code(KC_3);
+      } else {
+        unregister_code(KC_LALT);
+        unregister_code(KC_LSFT);
+        unregister_code(KC_3);
       }
       return false;
       break;
