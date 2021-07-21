@@ -25,7 +25,6 @@ enum planck_layers {
   _LOWER,
   _RAISE,
   _ADJUST,
-  _NAV
 };
 
 enum planck_keycodes {
@@ -39,16 +38,7 @@ enum planck_keycodes {
   ATOM_M5,
   ATOM_M6,
   ATOM_M7,
-  ATOM_M8,
-  NN_A,
-  NN_S,
-  NN_W,
-  NN_D,
-  NN_T,
-  NN_Q,
-  NN_E,
-  NN_N,
-  NN_SPC
+  ATOM_M8
 };
 
 // https://docs.qmk.fm/#/feature_tap_dance
@@ -76,7 +66,6 @@ enum planck_keycodes {
 #define LOWER MO(_LOWER)
 #define RAISE MO(_RAISE)
 #define NUMPAD TG(_NUMPAD)
-#define NAV TG(_NAV)
 
 // My custom Mod-Tap constants
 #define AA_Z MT(MOD_LCTL | MOD_LALT | MOD_LGUI | MOD_LSFT, KC_Z)
@@ -89,8 +78,6 @@ enum planck_keycodes {
 /* #define AA_D LALT_T(KC_D) */
 /* #define AA_F LSFT_T(KC_F) */
 
-/* #define AA_D LT(_NAV, KC_SCLN) */
-
 /* // Right-hand home row mods */
 /* #define AA_J LSFT_T(KC_J) */
 /* #define AA_K RGUI_T(KC_K) */
@@ -99,8 +86,6 @@ enum planck_keycodes {
 #define AA_QUOT LGUI_T(KC_QUOT)
 
 /* #define AA_SCLN LGUI_T(KC_SCLN) */
-
-#define AA_SPC LT(_NAV, KC_SPC)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
@@ -119,7 +104,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_TAB,         KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_BSPC,
     CTL_T(KC_ESC),  KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, AA_QUOT,
     KC_LSFT,        AA_Z,    AA_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_ENT ,
-    KC_LCTL,        KC_LCTL, KC_LGUI, KC_LALT, LOWER,   AA_SPC,  AA_SPC,  RAISE,   KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT
+    KC_LCTL,        KC_LCTL, KC_LGUI, KC_LALT, LOWER,   KC_SPC,  KC_SPC,  RAISE,   KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT
 ),
 
 /* Qwerty CSGO (QwerCS)
@@ -159,24 +144,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 ),
 
 
-/* Nav
- * ,-----------------------------------------------------------------------------------.
- * |      |      | UP+  |      |      |      |      |      |      |      | Up   |      |
- * |------+------+------+------+------+------+------+------+------+------+------+------|
- * |      | LEFT+| DOWN+|RIGHT+|      |      | Left | Down | Up   | Right|      |      |
- * |------+------+------+------+------+------+------+------+------+------+------+------|
- * |      |      |      |      |      |      | Down |      |      |      |      |      |
- * |------+------+------+------+------+------+------+------+------+------+------+------|
- * |      |      |      |      |      |    Space    |      |      |      |      |      |
- * `-----------------------------------------------------------------------------------'
- */
-[_NAV] = LAYOUT_planck_grid(
-    _______,    NN_Q,    NN_W,     NN_E, _______,    NN_T, _______, _______, _______, _______, _______, _______,
-    _______,    NN_A,    NN_S,     NN_D, _______, _______, KC_LEFT, KC_DOWN,   KC_UP, KC_RGHT, _______, _______,
-        NAV, _______, _______,  _______, _______, _______,    NN_N, _______, _______, _______, _______, _______,
-    _______, _______, _______,  _______, _______,  NN_SPC,  NN_SPC, _______, _______, _______, _______, _______
-),
-
 /* Lower
  * ,-----------------------------------------------------------------------------------.
  * |   ~  |   !  |   @  |   #  |   $  |   %  |   ^  |   &  |   *  |   (  |   )  | F13  |
@@ -191,7 +158,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [_LOWER] = LAYOUT_planck_grid(
     KC_TILD, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC, KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, KC_F13,
     KC_DEL,  _______, _______, ATOM_M1, ATOM_M2, ATOM_M4, ATOM_M5, KC_UNDS, KC_PLUS, KC_LCBR, KC_RCBR, KC_PIPE,
-       NAV, ATOM_M7, ATOM_M8, _______, _______, _______, ATOM_M6, ATOM_M3, KC_MPRV, KC_HOME, KC_END,  _______,
+    _______, ATOM_M7, ATOM_M8, _______, _______, _______, ATOM_M6, ATOM_M3, KC_MPRV, KC_HOME, KC_END,  _______,
     NUMPAD,  _______, _______, _______, _______, _______, _______, _______, KC_MNXT, KC_BRID, KC_BRIU, KC_MPLY
 ),
 
@@ -271,7 +238,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       }
       return false;
       break;
-    case NN_Q:
     case ATOM_M1:
       if (record->event.pressed) {
         register_code(KC_LCTL);
@@ -282,7 +248,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       }
       return false;
       break;
-    case NN_E:
     case ATOM_M2:
       if (record->event.pressed) {
         register_code(KC_LCTL);
@@ -344,70 +309,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         unregister_code(KC_LALT);
         unregister_code(KC_LSFT);
         unregister_code(KC_3);
-      }
-      return false;
-      break;
-    case NN_A:
-      if (record->event.pressed) {
-        register_code(KC_LGUI);
-        register_code(KC_LSFT);
-        register_code(KC_LEFT);
-      } else {
-        unregister_code(KC_LGUI);
-        unregister_code(KC_LSFT);
-        unregister_code(KC_LEFT);
-      }
-      return false;
-      break;
-    case NN_S:
-      if (record->event.pressed) {
-        SEND_STRING(SS_RGUI("s"));
-      }
-      return false;
-      break;
-    case NN_W:
-      if (record->event.pressed) {
-        SEND_STRING(SS_RGUI("w"));
-      }
-      return false;
-      break;
-    case NN_D:
-      if (record->event.pressed) {
-        register_code(KC_LGUI);
-        register_code(KC_LSFT);
-        register_code(KC_RGHT);
-      } else {
-        unregister_code(KC_LGUI);
-        unregister_code(KC_LSFT);
-        unregister_code(KC_RGHT);
-      }
-      return false;
-      break;
-    case NN_T:
-      if (record->event.pressed) {
-        SEND_STRING(SS_RGUI("t"));
-      }
-      return false;
-      break;
-    case NN_N:
-      if (record->event.pressed) {
-        register_code(KC_RGUI);
-        register_code(KC_LSFT);
-        register_code(KC_N);
-      } else {
-        unregister_code(KC_RGUI);
-        unregister_code(KC_LSFT);
-        unregister_code(KC_N);
-      }
-      return false;
-      break;
-    case NN_SPC:
-      if (record->event.pressed) {
-        register_code(KC_RGUI);
-        register_code(KC_BSPC);
-      } else {
-        unregister_code(KC_RGUI);
-        unregister_code(KC_BSPC);
       }
       return false;
       break;
