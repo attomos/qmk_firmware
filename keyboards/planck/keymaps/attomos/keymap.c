@@ -406,7 +406,7 @@ bool music_mask_user(uint16_t keycode) {
 bool get_ignore_mod_tap_interrupt(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
         case AA_Z:
-            return true;
+        case AA_X:
             return true;
         default:
             return false;
@@ -416,7 +416,7 @@ bool get_ignore_mod_tap_interrupt(uint16_t keycode, keyrecord_t *record) {
 bool get_retro_tapping(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
         case AA_Z:
-            return true;
+        case AA_X:
             return true;
         default:
             return false;
