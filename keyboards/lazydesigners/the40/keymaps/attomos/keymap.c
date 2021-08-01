@@ -20,6 +20,7 @@
 
 enum the40_layers {
   _QWERTY,
+  _NAV,
   _COLEMAK,
   _QWERTY_CSGO,
   _NUMPAD,
@@ -39,21 +40,13 @@ enum the40_keycodes {
   ATOM_M5,
   ATOM_M6,
   ATOM_M7,
-  ATOM_M8,
-  NN_A,
-  NN_S,
-  NN_W,
-  NN_D,
-  NN_T,
-  NN_Q,
-  NN_E,
-  NN_N,
-  NN_SPC
+  ATOM_M8
 };
 
 #define LOWER MO(_LOWER)
 #define RAISE LT(_RAISE, KC_ENT)
 #define NUMPAD TG(_NUMPAD)
+#define NAV TT(_NAV)
 
 // My custom Mod-Tap constants
 #define AA_Z MT(MOD_LCTL | MOD_LALT | MOD_LGUI | MOD_LSFT, KC_Z)
@@ -81,9 +74,28 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [_QWERTY] = LAYOUT_ortho(
     KC_TAB,         KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_BSPC,
     CTL_T(KC_ESC),  KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT,
-    KC_LSFT,        AA_Z,    AA_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, XXXXXXX ,
+    KC_LSFT,        AA_Z,    AA_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, NAV ,
     KC_LCTL,        KC_LCTL, KC_LGUI, KC_LALT, LOWER,   KC_SPC,  KC_SPC,  RAISE,   KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT
 ),
+
+/* Nav
+ * ,-----------------------------------------------------------------------------------.
+ * |      | Home | UP   |      |      |      |      |      |      |      |      |      |
+ * |------+------+------+------+------+------+------+------+------+------+------+------|
+ * |      | LEFT | DOWN |RIGHT |      |      |      |      |      |      |      |      |
+ * |------+------+------+------+------+------+------+------+------+------+------+------|
+ * |      |      |      |      |      |      |      |      |      |      |      |      |
+ * |------+------+------+------+------+------+------+------+------+------+------+------|
+ * |      |      |      |      |      |    Space    |      |      |      |      |      |
+ * `-----------------------------------------------------------------------------------'
+ */
+[_NAV] = LAYOUT_ortho(
+    _______, KC_HOME,   KC_UP,   KC_END, _______, _______, _______, _______, _______, _______, _______, _______,
+    _______, KC_LEFT, KC_DOWN, KC_RIGHT, _______, _______, _______, _______, _______, _______, _______, _______,
+    _______, _______, _______,  _______, _______, _______, _______, _______, _______, _______, _______, _______,
+    _______, _______, _______,  _______, _______,  KC_SPC,  KC_SPC, _______, _______, _______, _______, _______
+),
+
 
 /* Colemak
  * ,-----------------------------------------------------------------------------------.
@@ -223,7 +235,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       }
       return false;
       break;
-    case NN_Q:
     case ATOM_M1:
       if (record->event.pressed) {
         register_code(KC_LCTL);
@@ -234,7 +245,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       }
       return false;
       break;
-    case NN_E:
     case ATOM_M2:
       if (record->event.pressed) {
         register_code(KC_LCTL);
@@ -296,70 +306,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         unregister_code(KC_LALT);
         unregister_code(KC_LSFT);
         unregister_code(KC_3);
-      }
-      return false;
-      break;
-    case NN_A:
-      if (record->event.pressed) {
-        register_code(KC_LGUI);
-        register_code(KC_LSFT);
-        register_code(KC_LEFT);
-      } else {
-        unregister_code(KC_LGUI);
-        unregister_code(KC_LSFT);
-        unregister_code(KC_LEFT);
-      }
-      return false;
-      break;
-    case NN_S:
-      if (record->event.pressed) {
-        SEND_STRING(SS_RGUI("s"));
-      }
-      return false;
-      break;
-    case NN_W:
-      if (record->event.pressed) {
-        SEND_STRING(SS_RGUI("w"));
-      }
-      return false;
-      break;
-    case NN_D:
-      if (record->event.pressed) {
-        register_code(KC_LGUI);
-        register_code(KC_LSFT);
-        register_code(KC_RGHT);
-      } else {
-        unregister_code(KC_LGUI);
-        unregister_code(KC_LSFT);
-        unregister_code(KC_RGHT);
-      }
-      return false;
-      break;
-    case NN_T:
-      if (record->event.pressed) {
-        SEND_STRING(SS_RGUI("t"));
-      }
-      return false;
-      break;
-    case NN_N:
-      if (record->event.pressed) {
-        register_code(KC_RGUI);
-        register_code(KC_LSFT);
-        register_code(KC_N);
-      } else {
-        unregister_code(KC_RGUI);
-        unregister_code(KC_LSFT);
-        unregister_code(KC_N);
-      }
-      return false;
-      break;
-    case NN_SPC:
-      if (record->event.pressed) {
-        register_code(KC_RGUI);
-        register_code(KC_BSPC);
-      } else {
-        unregister_code(KC_RGUI);
-        unregister_code(KC_BSPC);
       }
       return false;
       break;
