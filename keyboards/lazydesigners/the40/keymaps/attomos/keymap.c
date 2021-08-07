@@ -40,7 +40,9 @@ enum the40_keycodes {
   ATOM_M5,
   ATOM_M6,
   ATOM_M7,
-  ATOM_M8
+  ATOM_M8,
+  ATOM_N0,
+  ATOM_N1
 };
 
 #define LOWER MO(_LOWER)
@@ -63,6 +65,7 @@ enum the40_keycodes {
 
 
 #define AA_ESC CTL_T(KC_ESC)
+#define AA_SPC LT(_NAV, KC_SPC)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* Qwerty
@@ -78,16 +81,16 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 [_QWERTY] = LAYOUT_ortho(
     KC_TAB,         KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_BSPC,
-    CTL_T(KC_ESC),  KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    AA_K,    KC_L,    AA_SCLN, KC_QUOT,
+    CTL_T(KC_ESC),  KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT,
     KC_LSFT,        AA_Z,    AA_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, NAV ,
-    KC_LCTL,        KC_LCTL, KC_LGUI, KC_LALT, LOWER,   KC_SPC,  KC_SPC,  RAISE,   KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT
+    KC_LCTL,        KC_LCTL, KC_LGUI, KC_LALT, LOWER,   KC_SPC,  AA_SPC,  RAISE,   KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT
 ),
 
 /* Nav
  * ,-----------------------------------------------------------------------------------.
  * |      |  M4  | UP   |  M5  | Vol+ |      |      |      |      |      |      |      |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * |      | LEFT | DOWN |RIGHT | Mute |      |      |      |      |      |      |      |
+ * |      | LEFT | DOWN |RIGHT | Mute |      |      |  3j  |  3k  |      |      |      |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
  * |      | Prev | Play | Next | Vol- |      |      |      |      |      |      |      |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
@@ -96,7 +99,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 [_NAV] = LAYOUT_ortho(
     _______, ATOM_M4,   KC_UP,  ATOM_M5, KC_VOLU, _______, _______, _______, _______, _______, _______, _______,
-    _______, KC_LEFT, KC_DOWN, KC_RIGHT, KC_MUTE, _______, _______, _______, _______, _______, _______, _______,
+    _______, KC_LEFT, KC_DOWN, KC_RIGHT, KC_MUTE, _______, _______, ATOM_N0, ATOM_N1, _______, _______, _______,
     _______, KC_MPRV, KC_MPLY,  KC_MNXT, KC_VOLD, _______, _______, _______, _______, _______, _______, _______,
     _______, _______, _______,  _______, _______,  KC_SPC,  KC_SPC, _______, _______, _______, _______, _______
 ),
@@ -134,7 +137,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_TAB,         KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_BSPC,
     CTL_T(KC_ESC),  KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT,
     KC_LSFT,        KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_ENT ,
-    LCTL_T(KC_ESC), KC_LCTL, KC_LGUI, KC_LALT, CRAISE,   KC_SPC,  KC_SPC,  CLOWER,   KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT
+    LCTL_T(KC_ESC), KC_LCTL, KC_LGUI, KC_LALT, CRAISE,  KC_SPC,  KC_SPC,  CLOWER,   KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT
 ),
 
 /* Numpad + (Readline home/end, select all, undo, cut, and copy)
@@ -310,6 +313,18 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         unregister_code(KC_LALT);
         unregister_code(KC_LSFT);
         unregister_code(KC_3);
+      }
+      return false;
+      break;
+    case ATOM_N0:
+      if (record->event.pressed) {
+        SEND_STRING("3j");
+      }
+      return false;
+      break;
+    case ATOM_N1:
+      if (record->event.pressed) {
+        SEND_STRING("3k");
       }
       return false;
       break;
