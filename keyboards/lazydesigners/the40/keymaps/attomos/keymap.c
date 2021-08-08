@@ -41,6 +41,7 @@ enum the40_keycodes {
   ATOM_M6,
   ATOM_M7,
   ATOM_M8,
+  ATOM_M9,
   ATOM_N0,
   ATOM_N1
 };
@@ -163,7 +164,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ,-----------------------------------------------------------------------------------.
  * |   ~  |   !  |   @  |   #  |   $  |   %  |   ^  |   &  |   *  |   (  |   )  | Bksp |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * | Del  | F13  |      |  M1  |  M2  |  M4  |  M5  |   _  |   +  |   {  |   }  |  |   |
+ * | Del  | F13  |  M9  |  M1  |  M2  |      |      |   _  |   +  |   {  |   }  |  |   |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
  * |      |  M7  |  M8  |      |      |      |  M6  |  M3  | Prev | Home | End  |      |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
@@ -172,7 +173,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 [_LOWER] = LAYOUT_ortho(
     KC_TILD, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC, KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, KC_BSPC,
-    KC_DEL,  KC_F13, _______, ATOM_M1, ATOM_M2, ATOM_M4, ATOM_M5, KC_UNDS, KC_PLUS, KC_LCBR, KC_RCBR, KC_PIPE,
+    KC_DEL,  KC_F13,  ATOM_M9, ATOM_M1, ATOM_M2, _______, _______, KC_UNDS, KC_PLUS, KC_LCBR, KC_RCBR, KC_PIPE,
     _______, ATOM_M7, ATOM_M8, _______, _______, _______, ATOM_M6, ATOM_M3, KC_MPRV, KC_HOME, KC_END,  _______,
     NUMPAD,  _______, _______, _______, _______, _______, _______, _______, _______, KC_BRID, KC_BRIU, _______
 ),
@@ -313,6 +314,18 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         unregister_code(KC_LALT);
         unregister_code(KC_LSFT);
         unregister_code(KC_3);
+      }
+      return false;
+      break;
+    case ATOM_M9:
+      if (record->event.pressed) {
+        register_code(KC_LALT);
+        register_code(KC_LSFT);
+        register_code(KC_F7);
+      } else {
+        unregister_code(KC_LALT);
+        unregister_code(KC_LSFT);
+        unregister_code(KC_F7);
       }
       return false;
       break;
