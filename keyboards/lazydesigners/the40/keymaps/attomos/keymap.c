@@ -43,7 +43,9 @@ enum the40_keycodes {
   ATOM_M8,
   ATOM_M9,
   ATOM_N0,
-  ATOM_N1
+  ATOM_N1,
+  ATOM_S1,
+  ATOM_S2
 };
 
 #define LOWER MO(_LOWER)
@@ -210,7 +212,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 [_ADJUST] = LAYOUT_ortho(
     _______,   RESET,   DEBUG, _______, _______, _______, _______, _______, _______,  _______, _______, _______ ,
-    _______, _______, _______, _______, _______, _______, _______,  QWERTY, COLEMAK,  _______, _______, QWERCSGO,
+    _______, _______, ATOM_S1, ATOM_S2, _______, _______, _______,  QWERTY, COLEMAK,  _______, _______, QWERCSGO,
     _______, _______, _______, _______, _______, _______, _______, _______, _______,  _______, _______, _______,
     _______, _______, _______, _______, _______, _______, _______, _______, _______,  _______, _______, _______
 )
@@ -338,6 +340,22 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     case ATOM_N1:
       if (record->event.pressed) {
         SEND_STRING("3k");
+      }
+      return false;
+      break;
+    case ATOM_S1:
+      if (record->event.pressed) {
+        tap_code(KC_SCROLLLOCK);
+        tap_code(KC_SCROLLLOCK);
+        tap_code(KC_1);
+      }
+      return false;
+      break;
+    case ATOM_S2:
+      if (record->event.pressed) {
+        tap_code(KC_SCROLLLOCK);
+        tap_code(KC_SCROLLLOCK);
+        tap_code(KC_2);
       }
       return false;
       break;
