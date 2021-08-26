@@ -49,10 +49,12 @@ enum the40_keycodes {
 };
 
 #define LOWER MO(_LOWER)
-#define RAISE LT(_RAISE, KC_ENT)
+/* #define RAISE LT(_RAISE, KC_ENT) */
+#define RAISE MO(_RAISE)
 
 // For CSGO layer
-#define CLOWER LT(_LOWER, KC_ENT)
+/* #define CLOWER LT(_LOWER, KC_ENT) */
+#define CLOWER MO(_LOWER)
 #define CRAISE MO(_RAISE)
 
 #define NUMPAD TG(_NUMPAD)
@@ -85,7 +87,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [_QWERTY] = LAYOUT_ortho(
     KC_TAB,         KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_BSPC,
     CTL_T(KC_ESC),  KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT,
-    KC_LSFT,        AA_Z,    AA_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, NAV ,
+    KC_LSFT,        AA_Z,    AA_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_ENT ,
     KC_LCTL,        KC_LCTL, KC_LGUI, KC_LALT, LOWER,   KC_SPC,  AA_SPC,  RAISE,   KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT
 ),
 
