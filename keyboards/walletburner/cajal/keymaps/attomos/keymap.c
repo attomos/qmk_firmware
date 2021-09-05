@@ -36,9 +36,6 @@ enum cajal_keycodes {
 };
 
 
-// better spacebar
-/* #define AA_SPC LT(_ONE, KC_SPC) */
-
 #define AA_SLSH LT(_NAV, KC_SLSH)
 
 // My custom Mod-Tap constants
