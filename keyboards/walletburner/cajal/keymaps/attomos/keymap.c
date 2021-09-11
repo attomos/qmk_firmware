@@ -29,6 +29,8 @@ enum cajal_keycodes {
   ATOM_N1,
   ATOM_S1,
   ATOM_S2,
+  ATOM_S3,
+  ATOM_S4,
   TMUX_M1,
   TMUX_M2,
   TMUX_M3,
@@ -56,7 +58,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       RESET, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_HOME, KC_PGDN, KC_END
   ),
   [_TWO] = LAYOUT_stagger(
-      KC_TILD, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_MUTE, KC_TRNS, KC_TRNS,
+      KC_TILD, ATOM_S3, ATOM_S4, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_MUTE, KC_TRNS, KC_TRNS,
       KC_TRNS, KC_F1, KC_F2, KC_F3, KC_F4, KC_F5, KC_F6, ATOM_N0, ATOM_N1, KC_TRNS, KC_TRNS, KC_TRNS,
       KC_TRNS, KC_F7, KC_F8, KC_F9, KC_F10, KC_F11, KC_F12, KC_TRNS, RGB_SAD, RGB_SAI, KC_TRNS, RGB_VAI,
       KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, RGB_HUD, RGB_VAD, RGB_HUI
@@ -261,6 +263,38 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         tap_code(KC_SCROLLLOCK);
         tap_code(KC_SCROLLLOCK);
         tap_code(KC_2);
+      }
+      return false;
+      break;
+    case ATOM_S3:
+      if (record->event.pressed) {
+        register_code(KC_LCTL);
+        register_code(KC_LALT);
+        register_code(KC_LGUI);
+        register_code(KC_LSFT);
+        register_code(KC_1);
+      } else {
+        unregister_code(KC_LCTL);
+        unregister_code(KC_LALT);
+        unregister_code(KC_LGUI);
+        unregister_code(KC_LSFT);
+        unregister_code(KC_1);
+      }
+      return false;
+      break;
+    case ATOM_S4:
+      if (record->event.pressed) {
+        register_code(KC_LCTL);
+        register_code(KC_LALT);
+        register_code(KC_LGUI);
+        register_code(KC_LSFT);
+        register_code(KC_2);
+      } else {
+        unregister_code(KC_LCTL);
+        unregister_code(KC_LALT);
+        unregister_code(KC_LGUI);
+        unregister_code(KC_LSFT);
+        unregister_code(KC_2);
       }
       return false;
       break;
