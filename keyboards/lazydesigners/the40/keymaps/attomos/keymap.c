@@ -65,8 +65,16 @@ enum the40_keycodes {
 #define AA_X MT(MOD_LCTL | MOD_LALT | MOD_LGUI, KC_X)
 
 // Partial home-row mods
+// CAGS home-row mod
+#define AA_A C_S_T(KC_A)
+#define AA_S RALT_T(KC_S)
+#define AA_D RGUI_T(KC_D)
+#define AA_F RSFT_T(KC_F)
+
+#define AA_J RSFT_T(KC_J)
 #define AA_K RGUI_T(KC_K)
-#define AA_SCLN LGUI_T(KC_SCLN)
+#define AA_L RALT_T(KC_L)
+#define AA_SCLN C_S_T(KC_SCLN)
 
 
 #define AA_ESC CTL_T(KC_ESC)
@@ -86,7 +94,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 [_QWERTY] = LAYOUT_ortho(
     KC_TAB,         KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_BSPC,
-    CTL_T(KC_ESC),  KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT,
+    CTL_T(KC_ESC),  KC_A,    KC_S,    AA_D,    AA_F,    KC_G,    KC_H,    AA_J,    AA_K,    AA_L,    AA_SCLN, KC_QUOT,
     KC_LSFT,        AA_Z,    AA_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_ENT ,
     KC_LCTL,        KC_LCTL, KC_LGUI, KC_LALT, LOWER,   KC_SPC,  AA_SPC,  RAISE,   KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT
 ),
@@ -366,11 +374,36 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 }
 
 
-// leave my CTL_T(KC_ESC) alone {{{
+// functions for those PER_KEY configs {{{
+uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
+    switch (keycode) {
+        case AA_Z:
+        case AA_X:
+        case AA_A:
+        case AA_S:
+        case AA_D:
+        case AA_F:
+        case AA_J:
+        case AA_K:
+        case AA_L:
+        case AA_SCLN:
+            return 900;
+        default:
+            return TAPPING_TERM;
+    }
+}
+
 bool get_ignore_mod_tap_interrupt(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
         case AA_Z:
         case AA_X:
+        case AA_A:
+        case AA_S:
+        case AA_D:
+        case AA_F:
+        case AA_J:
+        case AA_K:
+        case AA_L:
         case AA_SCLN:
             return true;
         default:
@@ -382,6 +415,13 @@ bool get_retro_tapping(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
         case AA_Z:
         case AA_X:
+        case AA_A:
+        case AA_S:
+        case AA_D:
+        case AA_F:
+        case AA_J:
+        case AA_K:
+        case AA_L:
         case AA_SCLN:
             return true;
         default:

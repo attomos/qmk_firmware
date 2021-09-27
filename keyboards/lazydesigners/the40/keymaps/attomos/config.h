@@ -1,5 +1,6 @@
 // https://beta.docs.qmk.fm/using-qmk/software-features/tap_hold#tapping-term
 #define TAPPING_TERM 150
+#define TAPPING_TERM_PER_KEY
 
 // I will use `zl` as an example to explain the reasoning behind the below settings
 
