@@ -41,7 +41,7 @@ enum cajal_keycodes {
 #define AA_SLSH LT(_NAV, KC_SLSH)
 
 // My custom Mod-Tap constants
-#define AA_Z MT(MOD_LCTL | MOD_LALT | MOD_LGUI | MOD_LSFT, KC_Z)
+#define AA_Z MT(MOD_LCTL | MOD_LALT | MOD_LSFT, KC_Z)
 #define AA_X MT(MOD_LCTL | MOD_LALT | MOD_LGUI, KC_X)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {

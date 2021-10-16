@@ -61,7 +61,7 @@ enum the40_keycodes {
 #define NAV TT(_NAV)
 
 // My custom Mod-Tap constants
-#define AA_Z MT(MOD_LCTL | MOD_LALT | MOD_LGUI | MOD_LSFT, KC_Z)
+#define AA_Z MT(MOD_LCTL | MOD_LALT | MOD_LSFT, KC_Z)
 #define AA_X MT(MOD_LCTL | MOD_LALT | MOD_LGUI, KC_X)
 
 // Partial home-row mods
