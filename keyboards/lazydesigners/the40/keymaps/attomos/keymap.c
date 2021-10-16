@@ -96,14 +96,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_TAB,         KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_BSPC,
     CTL_T(KC_ESC),  KC_A,    KC_S,    AA_D,    AA_F,    KC_G,    KC_H,    AA_J,    AA_K,    AA_L,    AA_SCLN, KC_QUOT,
     KC_LSFT,        AA_Z,    AA_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_ENT ,
-    KC_LCTL,        KC_LCTL, KC_LGUI, KC_LALT, LOWER,   KC_SPC,  AA_SPC,  RAISE,   KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT
+    KC_LCTL,        KC_LCTL, KC_LGUI, KC_LALT, LOWER,   AA_SPC,  KC_SPC,  RAISE,   KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT
 ),
 
 /* Nav
  * ,-----------------------------------------------------------------------------------.
- * |      |  M4  | UP   |  M5  | Vol+ |      |      |      |      |      |      |      |
+ * |      |  M4  |      |  M5  | Vol+ |      |      |      |      |      |      |      |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * |      | LEFT | DOWN |RIGHT | Mute |      |      |  3j  |  3k  |      |      |      |
+ * |      |      |      |      | Mute |      |      |  3j  |  3k  |      |      |      |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
  * |      | Prev | Play | Next | Vol- |      |      |      |      |      |      |      |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
@@ -111,8 +111,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * `-----------------------------------------------------------------------------------'
  */
 [_NAV] = LAYOUT_ortho(
-    _______, ATOM_M4,   KC_UP,  ATOM_M5, KC_VOLU, _______, _______, _______, _______, _______, _______, _______,
-    _______, KC_LEFT, KC_DOWN, KC_RIGHT, KC_MUTE, _______, _______, ATOM_N0, ATOM_N1, _______, _______, _______,
+    _______, ATOM_M4, ATOM_N1,  ATOM_M5, KC_VOLU, _______, _______, _______, _______, _______, _______, _______,
+    _______, _______, ATOM_N0,  _______, KC_MUTE, _______, KC_LEFT, KC_DOWN,   KC_UP, KC_RGHT, _______, _______,
     _______, KC_MPRV, KC_MPLY,  KC_MNXT, KC_VOLD, _______, _______, _______, _______, _______, _______, _______,
     _______, _______, _______,  _______, _______,  KC_SPC,  KC_SPC, _______, _______, _______, _______, _______
 ),
