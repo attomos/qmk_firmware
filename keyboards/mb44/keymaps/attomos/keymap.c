@@ -66,14 +66,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_LAYER1] = LAYOUT_2u1u_space(
         KC_GRV,  KC_1, KC_2, KC_3, KC_4, KC_5, KC_6, KC_7, KC_8, KC_9,    KC_0, _______,
         KC_DEL, KC_MINS, KC_EQL, KC_LBRC, KC_RBRC, KC_BSLS, KC_LEFT, KC_DOWN, KC_UP, KC_RGHT,    KC_QUOT, KC_ENT,
-        _______, ATOM_M7, _______,  ATOM_M1, ATOM_M2, _______, ATOM_M6, ATOM_M3, _______, _______,    _______, _______,
-        RESET, _______, _______, XXXXXXX,          _______, _______,                 _______, _______, _______ 
+        _______, ATOM_M7, _______,  ATOM_M1, ATOM_M2, _______, ATOM_M6, ATOM_M3, _______, KC_HOME,    KC_END, KC_BRIU,
+        RESET, _______, _______, XXXXXXX,          _______, _______,                 KC_PGUP, KC_BRID, KC_PGDN
     ),
 
     [_LAYER2] = LAYOUT_2u1u_space(
-        _______,   _______,   _______,   _______,   _______,   _______,    _______,   _______,   _______,   _______,  _______,  KC_F13,
-        KC_F13, KC_F1, KC_F2, KC_F3,  KC_F4,  KC_F5,  KC_F6, XXXXXXX, XXXXXXX, XXXXXXX, ATOM_M8, KC_VOLU,
-        XXXXXXX, KC_F7, KC_F8, KC_F9, KC_F10, KC_F11, KC_F12, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_VOLD,
+        _______,   _______,   ATOM_S1,   ATOM_S2,   _______,   _______,    _______,   _______,   _______,   _______,  _______,  KC_VOLU,
+        KC_F13, KC_F1, KC_F2, KC_F3,  KC_F4,  KC_F5,  KC_F6, KC_F13, XXXXXXX, XXXXXXX, ATOM_M8, KC_MUTE,
+        XXXXXXX, KC_F7, KC_F8, KC_F9, KC_F10, KC_F11, KC_F12, XXXXXXX, KC_MPLY, KC_MPRV, KC_MNXT, KC_VOLD,
         _______, XXXXXXX, XXXXXXX, XXXXXXX,          XXXXXXX, XXXXXXX,                   XXXXXXX, XXXXXXX, XXXXXXX
     ),
 };
