@@ -11,7 +11,8 @@ enum cajal_layers {
   _QWERTY,
   _ONE,
   _TWO,
-  _NAV
+  _NAV,
+  _THREE
 };
 
 enum cajal_keycodes {
@@ -34,7 +35,17 @@ enum cajal_keycodes {
   TMUX_M1,
   TMUX_M2,
   TMUX_M3,
-  TMUX_M4
+  TMUX_M4,
+  ATOM_T1,
+  ATOM_T2,
+  ATOM_T3,
+  ATOM_T4,
+  ATOM_T5,
+  ATOM_T6,
+  ATOM_T7,
+  ATOM_T8,
+  ATOM_T9,
+  ATOM_T0,
 };
 
 typedef enum {
@@ -65,6 +76,7 @@ td_state_t cur_dance(qk_tap_dance_state_t *state);
 void ctl_esc_finished(qk_tap_dance_state_t *state, void *user_data);
 void ctl_esc_reset(qk_tap_dance_state_t *state, void *user_data);
 
+#define AA_COMM LT(_THREE, KC_COMM)
 #define AA_SLSH LT(_NAV, KC_SLSH)
 
 // My custom Mod-Tap constants
@@ -75,7 +87,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_QWERTY] = LAYOUT_stagger(
       KC_TAB, KC_Q, KC_W, KC_E, KC_R, KC_T, KC_Y, KC_U, KC_I, KC_O, KC_P, KC_DEL, KC_BSPC, RGB_TOG,
       LCTL_T(KC_ESC), KC_A, KC_S, KC_D, KC_F, KC_G, KC_H, KC_J, KC_K, KC_L, KC_SCLN, KC_ENT,
-      KC_LSFT, AA_Z, AA_X, KC_C, KC_V, KC_B, KC_N, KC_M, KC_COMM, KC_DOT, AA_SLSH, KC_UP,
+      KC_LSFT, AA_Z, AA_X, KC_C, KC_V, KC_B, KC_N, KC_M, AA_COMM, KC_DOT, AA_SLSH, KC_UP,
       KC_LCTL, KC_LGUI, KC_LALT, MO(_ONE), KC_SPC, XXXXXXX, KC_RGUI, KC_LEFT, KC_DOWN, KC_RGHT
   ),
   [_ONE] = LAYOUT_stagger(
@@ -94,6 +106,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       TMUX_M1, ATOM_M1, KC_TRNS, ATOM_M2, TMUX_M3, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
       TMUX_M2,   KC_F1,  KC_F2,    KC_F3,   KC_F4,   KC_F5,   KC_F6, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
       KC_TRNS,   KC_F7,  KC_F8,    KC_F9,  KC_F10,  KC_F11,  KC_F12, KC_MPLY, KC_MPRV, KC_MNXT, KC_TRNS, KC_TRNS,
+      KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS
+  ),
+  [_THREE] = LAYOUT_stagger(
+      KC_TRNS, ATOM_T1, ATOM_T2, ATOM_T3, ATOM_T4, ATOM_T5, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+      KC_TRNS, ATOM_T6, ATOM_T7, ATOM_T8, ATOM_T9, ATOM_T0, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+      KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
       KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS
   )
 };
@@ -323,6 +341,46 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         unregister_code(KC_LSFT);
         unregister_code(KC_2);
       }
+      return false;
+      break;
+    case ATOM_T1:
+      SEND_STRING(SS_RGUI("1"));
+      return false;
+      break;
+    case ATOM_T2:
+      SEND_STRING(SS_RGUI("2"));
+      return false;
+      break;
+    case ATOM_T3:
+      SEND_STRING(SS_RGUI("3"));
+      return false;
+      break;
+    case ATOM_T4:
+      SEND_STRING(SS_RGUI("4"));
+      return false;
+      break;
+    case ATOM_T5:
+      SEND_STRING(SS_RGUI("5"));
+      return false;
+      break;
+    case ATOM_T6:
+      SEND_STRING(SS_RGUI("6"));
+      return false;
+      break;
+    case ATOM_T7:
+      SEND_STRING(SS_RGUI("7"));
+      return false;
+      break;
+    case ATOM_T8:
+      SEND_STRING(SS_RGUI("8"));
+      return false;
+      break;
+    case ATOM_T9:
+      SEND_STRING(SS_RGUI("9"));
+      return false;
+      break;
+    case ATOM_T0:
+      SEND_STRING(SS_RGUI("0"));
       return false;
       break;
   }
