@@ -20,7 +20,8 @@
 enum layer_names {
     _BASE,
     _LAYER1,
-    _LAYER2
+    _LAYER2,
+    _LAYER3
 };
 
 enum mb44_keycodes {
@@ -43,9 +44,20 @@ enum mb44_keycodes {
   TMUX_M1,
   TMUX_M2,
   TMUX_M3,
-  TMUX_M4
+  TMUX_M4,
+  ATOM_T1,
+  ATOM_T2,
+  ATOM_T3,
+  ATOM_T4,
+  ATOM_T5,
+  ATOM_T6,
+  ATOM_T7,
+  ATOM_T8,
+  ATOM_T9,
+  ATOM_T0,
 };
 
+#define AA_COMM LT(_LAYER3, KC_COMM)
 #define AA_SLSH LT(_LAYER2, KC_SLSH)
 
 
@@ -59,7 +71,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_BASE] = LAYOUT_2u1u_space(
         KC_TAB,        KC_Q,    KC_W,    KC_E,                KC_R, KC_T,    KC_Y,   KC_U,    KC_I,    KC_O,    KC_P,    KC_BSPC,
         LCTL_T(KC_ESC), KC_A,    KC_S,    KC_D,                KC_F, KC_G,    KC_H,   KC_J,    KC_K,    KC_L,    KC_SCLN, KC_ENT,
-        KC_LSFT,       AA_Z,    AA_X,    KC_C,                KC_V, KC_B,    KC_N,   KC_M,    KC_COMM, KC_DOT,  AA_SLSH,   KC_UP,
+        KC_LSFT,       AA_Z,    AA_X,    KC_C,                KC_V, KC_B,    KC_N,   KC_M,    AA_COMM, KC_DOT,  AA_SLSH,   KC_UP,
         KC_LCTL,   KC_LGUI, KC_LALT, MO(_LAYER1),       KC_SPC, KC_SPC,                   KC_LEFT, KC_DOWN, KC_RGHT
     ),
 
@@ -75,6 +87,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_F13, KC_F1, KC_F2, KC_F3,  KC_F4,  KC_F5,  KC_F6, KC_F13, XXXXXXX, XXXXXXX, ATOM_M8, KC_MUTE,
         XXXXXXX, KC_F7, KC_F8, KC_F9, KC_F10, KC_F11, KC_F12, XXXXXXX, KC_MPLY, KC_MPRV, KC_MNXT, KC_VOLD,
         _______, XXXXXXX, XXXXXXX, XXXXXXX,          XXXXXXX, XXXXXXX,                   XXXXXXX, XXXXXXX, XXXXXXX
+    ),
+
+    [_LAYER3] = LAYOUT_2u1u_space(
+        _______, ATOM_T1, ATOM_T2, ATOM_T3, ATOM_T4, ATOM_T5, _______, _______, _______, _______, _______, KC_VOLU,
+        _______, ATOM_T6, ATOM_T7, ATOM_T8, ATOM_T9, ATOM_T0, _______, _______, _______, _______, _______, _______,
+        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
+        _______, _______, _______, _______,          _______, _______,                   _______, _______, _______
     ),
 };
 
@@ -258,6 +277,46 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         unregister_code(KC_LSFT);
         unregister_code(KC_2);
       }
+      return false;
+      break;
+    case ATOM_T1:
+      SEND_STRING(SS_RGUI("1"));
+      return false;
+      break;
+    case ATOM_T2:
+      SEND_STRING(SS_RGUI("2"));
+      return false;
+      break;
+    case ATOM_T3:
+      SEND_STRING(SS_RGUI("3"));
+      return false;
+      break;
+    case ATOM_T4:
+      SEND_STRING(SS_RGUI("4"));
+      return false;
+      break;
+    case ATOM_T5:
+      SEND_STRING(SS_RGUI("5"));
+      return false;
+      break;
+    case ATOM_T6:
+      SEND_STRING(SS_RGUI("6"));
+      return false;
+      break;
+    case ATOM_T7:
+      SEND_STRING(SS_RGUI("7"));
+      return false;
+      break;
+    case ATOM_T8:
+      SEND_STRING(SS_RGUI("8"));
+      return false;
+      break;
+    case ATOM_T9:
+      SEND_STRING(SS_RGUI("9"));
+      return false;
+      break;
+    case ATOM_T0:
+      SEND_STRING(SS_RGUI("0"));
       return false;
       break;
   }
