@@ -55,6 +55,9 @@ enum mb44_keycodes {
   ATOM_T8,
   ATOM_T9,
   ATOM_T0,
+  ATOM_A0,
+  ATOM_A1,
+  ATOM_A2,
 };
 
 #define AA_COMM LT(_LAYER3, KC_COMM)
@@ -92,7 +95,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_LAYER3] = LAYOUT_2u1u_space(
         _______, ATOM_T1, ATOM_T2, ATOM_T3, ATOM_T4, ATOM_T5, _______, _______, _______, _______, _______, KC_VOLU,
         _______, ATOM_T6, ATOM_T7, ATOM_T8, ATOM_T9, ATOM_T0, _______, _______, _______, _______, _______, _______,
-        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
+        _______, ATOM_A0, ATOM_A1, ATOM_A2, _______, _______, _______, _______, _______, _______, _______, _______,
         _______, _______, _______, _______,          _______, _______,                   _______, _______, _______
     ),
 };
@@ -317,6 +320,24 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       break;
     case ATOM_T0:
       SEND_STRING(SS_RGUI("0"));
+      return false;
+      break;
+    case ATOM_A0:
+      if (record->event.pressed) {
+        SEND_STRING(SS_RGUI("-"));
+      }
+      return false;
+      break;
+    case ATOM_A1:
+      if (record->event.pressed) {
+        SEND_STRING(SS_RGUI(SS_LSFT("=")));
+      }
+      return false;
+      break;
+    case ATOM_A2:
+      if (record->event.pressed) {
+        SEND_STRING(SS_RGUI("0"));
+      }
       return false;
       break;
   }
