@@ -12,6 +12,7 @@ enum cajal_layers {
   _ONE,
   _TWO,
   _NAV,
+  _NAV2,
   _THREE
 };
 
@@ -78,6 +79,9 @@ void ctl_esc_reset(qk_tap_dance_state_t *state, void *user_data);
 
 #define AA_COMM LT(_THREE, KC_COMM)
 #define AA_SLSH LT(_NAV, KC_SLSH)
+#define AA_D MT(MOD_LGUI, KC_D)
+#define AA_K MT(MOD_RGUI, KC_K)
+#define AA_SCLN LT(_NAV2, KC_SCLN)
 
 // My custom Mod-Tap constants
 #define AA_Z MT(MOD_LCTL | MOD_LALT | MOD_LSFT, KC_Z)
@@ -86,7 +90,7 @@ void ctl_esc_reset(qk_tap_dance_state_t *state, void *user_data);
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_QWERTY] = LAYOUT_stagger(
       KC_TAB, KC_Q, KC_W, KC_E, KC_R, KC_T, KC_Y, KC_U, KC_I, KC_O, KC_P, KC_DEL, KC_BSPC, RGB_TOG,
-      LCTL_T(KC_ESC), KC_A, KC_S, KC_D, KC_F, KC_G, KC_H, KC_J, KC_K, KC_L, KC_SCLN, KC_ENT,
+      LCTL_T(KC_ESC), KC_A, KC_S, AA_D, KC_F, KC_G, KC_H, KC_J, AA_K, KC_L, AA_SCLN, KC_ENT,
       KC_LSFT, AA_Z, AA_X, KC_C, KC_V, KC_B, KC_N, KC_M, AA_COMM, KC_DOT, AA_SLSH, KC_UP,
       KC_LCTL, KC_LGUI, KC_LALT, MO(_ONE), KC_SPC, MO(_TWO), KC_RGUI, KC_LEFT, KC_DOWN, KC_RGHT
   ),
@@ -107,6 +111,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       KC_F13,   KC_F1,  KC_F2,    KC_F3,   KC_F4,   KC_F5,   KC_F6, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
       KC_TRNS,   KC_F7,  KC_F8,    KC_F9,  KC_F10,  KC_F11,  KC_F12, KC_MPLY, KC_MPRV, KC_MNXT, KC_TRNS, KC_TRNS,
       KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS
+  ),
+  [_NAV2] = LAYOUT_stagger(
+      _______, _______, KC_UP, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
+      _______, KC_LEFT, KC_DOWN, KC_RGHT, KC_PGDN, _______, KC_LEFT, KC_DOWN, KC_UP, KC_RGHT, _______, _______,
+      _______, _______, _______, _______, _______, KC_PGUP, _______, _______, _______, KC_HOME, KC_END, _______,
+      _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
   ),
   [_THREE] = LAYOUT_stagger(
       KC_TRNS, ATOM_T1, ATOM_T2, ATOM_T3, ATOM_T4, ATOM_T5, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
@@ -391,6 +401,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 // leave my CTL_T(KC_ESC) alone {{{
 bool get_ignore_mod_tap_interrupt(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
+        case AA_D:
+        case AA_K:
+        case AA_SCLN:
         case AA_Z:
         case AA_X:
         case AA_SLSH:
@@ -402,6 +415,9 @@ bool get_ignore_mod_tap_interrupt(uint16_t keycode, keyrecord_t *record) {
 
 bool get_retro_tapping(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
+        case AA_D:
+        case AA_K:
+        case AA_SCLN:
         case AA_Z:
         case AA_X:
         case AA_SLSH:
