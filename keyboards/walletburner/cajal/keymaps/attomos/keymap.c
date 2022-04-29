@@ -79,7 +79,7 @@ void ctl_esc_reset(qk_tap_dance_state_t *state, void *user_data);
 
 #define AA_COMM LT(_THREE, KC_COMM)
 #define AA_SLSH LT(_NAV, KC_SLSH)
-#define AA_D MT(MOD_LGUI, KC_D)
+#define AA_D MT(MOD_RALT, KC_D)
 #define AA_K MT(MOD_RGUI, KC_K)
 #define AA_SCLN LT(_NAV2, KC_SCLN)
 
