@@ -15,3 +15,7 @@
 
 // https://beta.docs.qmk.fm/using-qmk/software-features/feature_layers#switching-and-toggling-layers-id-switching-and-toggling-layers
 #define TAPPING_TOGGLE 2
+
+// https://github.com/qmk/qmk_firmware/blob/master/docs/feature_combo.md
+#define COMBO_COUNT 3
+#define COMBO_TERM 150

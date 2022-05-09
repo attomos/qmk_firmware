@@ -102,6 +102,38 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   )
 };
 
+// combo
+enum combo_events {
+  BSPC_LSFT_CLEAR,
+  DF_ESC,
+  JK_ESC,
+  COMBO_LENGTH
+};
+uint16_t COMBO_LEN = COMBO_LENGTH; // remove the COMBO_COUNT define and use this instead! (once that PR is merged)
+
+const uint16_t PROGMEM clear_line_combo[] = {KC_BSPC, KC_LSFT, COMBO_END};
+const uint16_t PROGMEM df_combo[] = {KC_D, KC_F, COMBO_END};
+const uint16_t PROGMEM jk_combo[] = {KC_J, KC_K, COMBO_END};
+
+combo_t key_combos[] = {
+  [BSPC_LSFT_CLEAR] = COMBO_ACTION(clear_line_combo),
+  [DF_ESC] = COMBO(df_combo, KC_ESC),
+  [JK_ESC] = COMBO(jk_combo, KC_ESC),
+};
+/* COMBO_ACTION(x) is same as COMBO(x, KC_NO) */
+
+void process_combo_event(uint16_t combo_index, bool pressed) {
+  switch(combo_index) {
+    case BSPC_LSFT_CLEAR:
+      if (pressed) {
+        tap_code16(KC_END);
+        tap_code16(S(KC_HOME));
+        tap_code16(KC_BSPC);
+      }
+      break;
+  }
+}
+
 const rgblight_segment_t PROGMEM my_layer0_layer[] = RGBLIGHT_LAYER_SEGMENTS(
     {0, 3, HSV_RED}
 );
