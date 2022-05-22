@@ -17,5 +17,5 @@
 #define TAPPING_TOGGLE 2
 
 // https://github.com/qmk/qmk_firmware/blob/master/docs/feature_combo.md
-#define COMBO_COUNT 3
-#define COMBO_TERM 150
+#define COMBO_COUNT 2
+#define COMBO_TERM 50

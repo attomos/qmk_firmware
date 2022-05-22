@@ -88,7 +88,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
 
   [_LAYER2] = LAYOUT_all(
-    _______, _______, ATOM_S1, ATOM_S2, _______, _______, _______, _______, _______, _______, ATOM_M8, _______, _______, _______, KC_VOLU,
+    _______, RGB_TOG, ATOM_S1, ATOM_S2, _______, _______, _______, _______, _______, _______, ATOM_M8, _______, _______, _______, KC_VOLU,
     KC_F13, KC_F1, KC_F2, KC_F3, KC_F4, KC_F5, KC_F6, _______, _______, _______, _______, _______, _______, KC_VOLD,
     KC_SLEP, KC_F7, KC_F8, KC_F9, KC_F10, KC_F11, KC_F12, KC_MPLY, KC_MPRV, KC_MNXT, _______, _______, KC_PSCR, KC_MUTE,
     RESET, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
@@ -111,12 +111,12 @@ enum combo_events {
 };
 uint16_t COMBO_LEN = COMBO_LENGTH; // remove the COMBO_COUNT define and use this instead! (once that PR is merged)
 
-const uint16_t PROGMEM clear_line_combo[] = {KC_BSPC, KC_LSFT, COMBO_END};
+const uint16_t PROGMEM clear_line_combo[] = {KC_J, KC_K, COMBO_END};
 const uint16_t PROGMEM df_combo[] = {KC_D, KC_F, COMBO_END};
 const uint16_t PROGMEM jk_combo[] = {KC_J, KC_K, COMBO_END};
 
 combo_t key_combos[] = {
-  [BSPC_LSFT_CLEAR] = COMBO_ACTION(clear_line_combo),
+  /* [BSPC_LSFT_CLEAR] = COMBO_ACTION(clear_line_combo), */
   [DF_ESC] = COMBO(df_combo, KC_ESC),
   [JK_ESC] = COMBO(jk_combo, KC_ESC),
 };
@@ -128,6 +128,8 @@ void process_combo_event(uint16_t combo_index, bool pressed) {
       if (pressed) {
         tap_code16(KC_END);
         tap_code16(S(KC_HOME));
+        tap_code16(KC_BSPC);
+        tap_code16(KC_BSPC);
         tap_code16(KC_BSPC);
       }
       break;
