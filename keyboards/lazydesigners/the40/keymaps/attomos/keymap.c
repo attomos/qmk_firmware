@@ -375,24 +375,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
 
 // functions for those PER_KEY configs {{{
-uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
-    switch (keycode) {
-        case AA_Z:
-        case AA_X:
-        case AA_A:
-        case AA_S:
-        case AA_D:
-        case AA_F:
-        case AA_J:
-        case AA_K:
-        case AA_L:
-        case AA_SCLN:
-            return 900;
-        default:
-            return TAPPING_TERM;
-    }
-}
-
 bool get_ignore_mod_tap_interrupt(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
         case AA_Z:
