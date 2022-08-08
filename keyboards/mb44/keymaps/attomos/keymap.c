@@ -63,6 +63,9 @@ enum mb44_keycodes {
 #define AA_COMM LT(_LAYER3, KC_COMM)
 #define AA_SLSH LT(_LAYER2, KC_SLSH)
 
+#define AA_K RGUI_T(KC_K)
+#define AA_L RALT_T(KC_L)
+
 
 // My custom Mod-Tap constants
 #define AA_Z MT(MOD_LCTL | MOD_LALT | MOD_LSFT, KC_Z)
@@ -73,7 +76,7 @@ enum mb44_keycodes {
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_BASE] = LAYOUT_2u1u_space(
         KC_TAB,        KC_Q,    KC_W,    KC_E,                KC_R, KC_T,    KC_Y,   KC_U,    KC_I,    KC_O,    KC_P,    KC_BSPC,
-        LCTL_T(KC_ESC), KC_A,    KC_S,    KC_D,                KC_F, KC_G,    KC_H,   KC_J,    KC_K,    KC_L,    KC_SCLN, KC_ENT,
+        LCTL_T(KC_ESC), KC_A,    KC_S,    KC_D,                KC_F, KC_G,    KC_H,   KC_J,    AA_K,    KC_L,    KC_SCLN, KC_ENT,
         KC_LSFT,       AA_Z,    AA_X,    KC_C,                KC_V, KC_B,    KC_N,   KC_M,    AA_COMM, KC_DOT,  AA_SLSH,   KC_UP,
         KC_LCTL,   KC_LGUI, KC_LALT, MO(_LAYER1),       KC_SPC, KC_SPC,                   KC_LEFT, KC_DOWN, KC_RGHT
     ),
@@ -86,9 +89,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
 
     [_LAYER2] = LAYOUT_2u1u_space(
-        _______,   _______,   ATOM_S1,   ATOM_S2,   _______,   _______,    _______,   _______,   _______,   _______,  _______,  KC_VOLU,
-        KC_F13, KC_F1, KC_F2, KC_F3,  KC_F4,  KC_F5,  KC_F6, KC_F13, XXXXXXX, XXXXXXX, ATOM_M8, KC_MUTE,
-        XXXXXXX, KC_F7, KC_F8, KC_F9, KC_F10, KC_F11, KC_F12, KC_MPLY, KC_MPRV, KC_MNXT, XXXXXXX, KC_VOLD,
+        _______,   _______,   ATOM_S1,   ATOM_S2,   _______,   _______,    _______,   KC_MUTE,   _______,   _______,  _______,  _______,
+        KC_F13, KC_F1, KC_F2, KC_F3,  KC_F4,  KC_F5,  KC_F6, KC_VOLD, KC_VOLU, _______, ATOM_M8, _______,
+        XXXXXXX, KC_F7, KC_F8, KC_F9, KC_F10, KC_F11, KC_F12, KC_MPLY, KC_MPRV, KC_MNXT, XXXXXXX, _______,
         _______, XXXXXXX, XXXXXXX, XXXXXXX,          XXXXXXX, XXXXXXX,                   XXXXXXX, XXXXXXX, XXXXXXX
     ),
 
@@ -350,6 +353,7 @@ bool get_ignore_mod_tap_interrupt(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
         case AA_Z:
         case AA_X:
+        case AA_K:
         case AA_SLSH:
             return true;
         default:
@@ -361,6 +365,7 @@ bool get_retro_tapping(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
         case AA_Z:
         case AA_X:
+        case AA_K:
         case AA_SLSH:
             return true;
         default:
