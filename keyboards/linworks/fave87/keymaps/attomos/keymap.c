@@ -45,8 +45,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_NAV] = LAYOUT_all(
     RGB_TOG,         RGB_VAD,  RGB_VAI,  BL_DEC,   BL_INC,   RGB_HUD,  RGB_HUI,  RGB_SAD,  RGB_SAI,  RGB_RMOD, RGB_MOD,  RGB_SPI,  RGB_SPI,                          KC_TRNS, RESET, KC_TRNS,
-    KC_GRV,          KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,      KC_TRNS, ATOM_S2, KC_BRIU,
-    KC_TRNS,         ATOM_M1,  KC_UP,    ATOM_M2,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,                KC_MUTE, ATOM_S1, KC_BRID,
+    KC_GRV,          KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,      KC_TRNS, LCG_NRM, KC_BRIU,
+    KC_TRNS,         ATOM_M1,  KC_UP,    ATOM_M2,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,                KC_MUTE, LCG_SWP, KC_BRID,
     KC_TRNS,         KC_F1,    KC_F2,    KC_F3,    KC_F4,    KC_F5,    KC_F6,    KC_PIPE,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,
     KC_TRNS,         KC_NUBS,  KC_F7,    KC_F8,    KC_F9,    KC_F10,   KC_F11,   KC_F12,   KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,                         KC_VOLU,
     KC_TRNS,         KC_TRNS,  KC_TRNS,                      KC_TRNS,                                          KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,                KC_MPRV, KC_VOLD, KC_MNXT),
